@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Backend Engineer Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0f5;
+    --muted: #7a7a8a;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --must: #ff6b6b;
+    --good: #fbbf24;
+    --plus: #34d399;
+    --must-bg: rgba(255,107,107,0.08);
+    --good-bg: rgba(251,191,36,0.08);
+    --plus-bg: rgba(52,211,153,0.08);
+    --must-border: rgba(255,107,107,0.2);
+    --good-border: rgba(251,191,36,0.2);
+    --plus-border: rgba(52,211,153,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    padding: 3rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent2);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  h1 span {
+    color: var(--accent);
+    position: relative;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  .leg {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .leg-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ---- TABS ---- */
+  .tabs-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 7px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .tab:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* ---- MAIN CONTENT ---- */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ---- CATEGORY ---- */
+  .category {
+    margin-bottom: 2.5rem;
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .cat-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .badge-must { background: var(--must-bg); color: var(--must); border: 1px solid var(--must-border); }
+  .badge-good { background: var(--good-bg); color: var(--good); border: 1px solid var(--good-border); }
+  .badge-plus { background: var(--plus-bg); color: var(--plus); border: 1px solid var(--plus-border); }
+
+  /* ---- ITEMS GRID ---- */
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+
+  .item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+  }
+
+  .item.must::before { background: var(--must); }
+  .item.good::before { background: var(--good); }
+  .item.plus::before { background: var(--plus); }
+
+  .item:hover {
+    border-color: var(--border2);
+    transform: translateY(-1px);
+  }
+
+  .item-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .item-sub {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ---- DIVIDER ---- */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ---- PROGRESS BAR (top) ---- */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- SCROLL FADE IN ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 600px) {
+    header { padding: 2rem 1.25rem 1.5rem; }
+    .tabs-wrap { padding: 0.75rem 1.25rem; }
+    .content { padding: 2rem 1.25rem 3rem; }
+    .items { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="header-label">1.5 YOE Backend Engineer</div>
+  <h1>Backend <span>Roadmap</span><br/>to get hired</h1>
+  <p class="header-sub">Everything you need to learn — organized by priority. Red = must know. Yellow = good to have. Green = stand out.</p>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--must)"></div> Must know</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--good)"></div> Good to have</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--plus)"></div> Stand out</div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="dsa">DSA</button>
+    <button class="tab" data-tab="backend">Backend core</button>
+    <button class="tab" data-tab="db">Databases</button>
+    <button class="tab" data-tab="infra">Infra & DevOps</button>
+    <button class="tab" data-tab="lld">LLD</button>
+    <button class="tab" data-tab="hld">HLD</button>
+    <button class="tab" data-tab="projects">Projects</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- DSA -->
+  <div class="section active" id="dsa">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Arrays & Strings</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Two pointers, sliding window, prefix sum</div>
+          <div class="item-sub">Sub-array sum, longest substring without repeat, max sliding window</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Binary search & variations</div>
+          <div class="item-sub">Search in rotated array, find peak, lower/upper bound — know all templates</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Sorting algorithm internals</div>
+          <div class="item-sub">Merge sort, quick sort, counting sort — know time/space complexity of each</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Linked List, Stack, Queue</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Linked list operations</div>
+          <div class="item-sub">Reverse, detect cycle (Floyd's), merge sorted lists, LRU cache implementation</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Monotonic stack & queue</div>
+          <div class="item-sub">Next greater element, largest rectangle in histogram, sliding window max</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Trees & Graphs</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Binary tree traversals (all 4)</div>
+          <div class="item-sub">Inorder, preorder, postorder, level-order — iterative + recursive both</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">BST operations + balanced trees</div>
+          <div class="item-sub">Insert, delete, validate BST, lowest common ancestor</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Graph: BFS, DFS, cycle detection</div>
+          <div class="item-sub">Directed & undirected, connected components, topological sort</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Shortest path algorithms</div>
+          <div class="item-sub">Dijkstra, Bellman-Ford — understand when to use which</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Union-Find (Disjoint Set)</div>
+          <div class="item-sub">Path compression + union by rank — used in network connectivity problems</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Dynamic Programming</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">1D DP: fibonacci, climbing stairs, house robber</div>
+          <div class="item-sub">Learn memoization → tabulation conversion pattern</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">2D DP: knapsack, LCS, edit distance</div>
+          <div class="item-sub">State definition is the key skill — practice identifying dp[i][j] meaning</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">DP on trees & interval DP</div>
+          <div class="item-sub">Matrix chain multiplication, burst balloons</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Heaps, Tries, Backtracking</div>
+        <span class="badge badge-good">good</span>
+      </div>
+      <div class="items">
+        <div class="item good">
+          <div class="item-title">Min/max heap, priority queue patterns</div>
+          <div class="item-sub">Top-K elements, merge K sorted lists, median from data stream</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Trie: insert, search, prefix match</div>
+          <div class="item-sub">Autocomplete, word search — common in backend search feature design</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Backtracking: subsets, permutations</div>
+          <div class="item-sub">Learn the template: choose → explore → unchoose</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BACKEND CORE -->
+  <div class="section" id="backend">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Node.js internals</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Event loop — all phases in depth</div>
+          <div class="item-sub">timers → I/O → idle → poll → check → close; microtask queue (Promise, process.nextTick)</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Streams & buffers</div>
+          <div class="item-sub">Readable, Writable, Transform streams — pipe, backpressure, chunked file processing</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Worker threads vs child process vs cluster</div>
+          <div class="item-sub">When to use each; CPU-bound vs I/O-bound task handling</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Memory management & GC</div>
+          <div class="item-sub">V8 heap (new/old space), memory leaks, heap profiling with --inspect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">NestJS architecture</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Module system, DI container, providers</div>
+          <div class="item-sub">Custom providers, useFactory, useClass, circular dependency resolution</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Guards, Interceptors, Pipes, Filters</div>
+          <div class="item-sub">Execution order, global vs route-level, custom implementations</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Middleware & request lifecycle</div>
+          <div class="item-sub">middleware → guard → interceptor (pre) → pipe → handler → interceptor (post) → filter</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">WebSocket gateway in NestJS</div>
+          <div class="item-sub">@WebSocketGateway, socket.io adapter, namespace/room management</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">API design</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">REST best practices</div>
+          <div class="item-sub">Resource naming, HTTP verbs, status codes, versioning (URI vs header), HATEOAS concept</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Pagination patterns</div>
+          <div class="item-sub">Offset vs cursor-based — know when cursor pagination is essential (large datasets)</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Rate limiting strategies</div>
+          <div class="item-sub">Fixed window, sliding window, token bucket, leaky bucket — implement with Redis</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">GraphQL basics</div>
+          <div class="item-sub">Schema, resolvers, N+1 problem (DataLoader), when to choose over REST</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Auth & Security</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">JWT deep dive</div>
+          <div class="item-sub">Header.Payload.Signature, access + refresh token pattern, rotation, Redis blacklist revocation</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">OAuth 2.0 flows</div>
+          <div class="item-sub">Authorization code + PKCE, client credentials — know which flow for which use case</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">RBAC implementation</div>
+          <div class="item-sub">Role → Permission mapping, attribute-based access control (ABAC) concept</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Security hardening</div>
+          <div class="item-sub">Helmet.js, CORS config, SQL injection, XSS, CSRF tokens, input sanitisation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Testing</div>
+        <span class="badge badge-good">good</span>
+      </div>
+      <div class="items">
+        <div class="item good">
+          <div class="item-title">Unit testing with Jest</div>
+          <div class="item-sub">Mocking (jest.fn, spyOn), testing services in isolation, coverage reports</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Integration & E2E testing</div>
+          <div class="item-sub">Supertest for API testing, test DB setup/teardown, test containers</div>
+        </div>
+        <div class="item plus">
+          <div class="item-title">Load testing with k6</div>
+          <div class="item-sub">Write load test scripts, interpret p95/p99 latency results, benchmark before/after</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DATABASES -->
+  <div class="section" id="db">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">PostgreSQL internals</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Indexing in depth</div>
+          <div class="item-sub">B-tree, Hash, GIN, GiST — composite, partial, covering indexes, index-only scans</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">EXPLAIN ANALYZE & query planner</div>
+          <div class="item-sub">Seq scan vs index scan vs bitmap scan, cost estimation, identifying slow queries</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Transactions & isolation levels</div>
+          <div class="item-sub">READ COMMITTED, REPEATABLE READ, SERIALIZABLE — dirty read, phantom read, non-repeatable read</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Locks</div>
+          <div class="item-sub">Row-level vs table-level, SELECT FOR UPDATE, advisory locks, deadlock detection</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Partitioning & sharding concepts</div>
+          <div class="item-sub">Range, list, hash partitioning; horizontal sharding strategies</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Replication</div>
+          <div class="item-sub">WAL-based streaming replication, read replicas, failover</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">MongoDB</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Aggregation pipeline</div>
+          <div class="item-sub">$match, $group, $lookup (join), $unwind, $project, $facet — optimisation order matters</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Schema design patterns</div>
+          <div class="item-sub">Embed vs reference — bucket pattern, outlier pattern, computed pattern</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Change streams & transactions</div>
+          <div class="item-sub">Multi-document ACID transactions (4.0+), change streams for real-time sync</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Redis</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Data structures & use cases</div>
+          <div class="item-sub">String (cache), Hash (session), List (queue), Set, ZSet (leaderboard), HyperLogLog (count distinct)</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Caching patterns</div>
+          <div class="item-sub">Cache-aside, write-through, write-behind — TTL strategy, cache stampede prevention</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Pub/Sub & Streams</div>
+          <div class="item-sub">Redis Streams vs Pub/Sub — consumer groups, message acknowledgement, replay</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Redis Cluster & persistence</div>
+          <div class="item-sub">RDB vs AOF, cluster sharding with hash slots, sentinel for HA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">ORMs</div>
+        <span class="badge badge-good">good</span>
+      </div>
+      <div class="items">
+        <div class="item good">
+          <div class="item-title">TypeORM — entities, relations, migrations</div>
+          <div class="item-sub">OneToMany, ManyToMany, lazy vs eager loading, query builder vs repository</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Prisma — schema, client, migrations</div>
+          <div class="item-sub">Prisma schema language, raw queries, nested writes, upsert patterns</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INFRA -->
+  <div class="section" id="infra">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Docker</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Dockerfile best practices</div>
+          <div class="item-sub">Multi-stage builds, layer caching, non-root user, .dockerignore, minimal base images (alpine)</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Docker Compose for local dev</div>
+          <div class="item-sub">Multi-service setup, volumes, networks, healthchecks, depends_on with condition</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Container networking</div>
+          <div class="item-sub">Bridge, host, overlay networks — container DNS, port publishing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">AWS essentials</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">EC2 — setup, SSH, security groups</div>
+          <div class="item-sub">AMIs, instance types, Elastic IP, key pairs, inbound/outbound rules</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">S3 — buckets, presigned URLs, lifecycle</div>
+          <div class="item-sub">Bucket policies, CORS, presigned URL generation, storage classes</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">IAM — roles, policies, least privilege</div>
+          <div class="item-sub">Role-based access, instance profiles, policy documents</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">RDS, ElastiCache, SQS basics</div>
+          <div class="item-sub">Managed PostgreSQL/Redis vs self-hosted trade-offs; SQS for decoupled queuing</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Load balancer & auto scaling</div>
+          <div class="item-sub">ALB vs NLB, target groups, health checks, ASG with CPU-based scaling policy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">CI/CD</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">GitHub Actions workflows</div>
+          <div class="item-sub">Triggers, jobs, steps, secrets, matrix builds, caching node_modules/Docker layers</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Build → test → deploy pipeline</div>
+          <div class="item-sub">Lint → unit test → build Docker image → push to ECR → SSH deploy to EC2</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Environment management</div>
+          <div class="item-sub">dev / staging / prod environments, env-specific secrets, blue-green deployment concept</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Nginx & Messaging</div>
+        <span class="badge badge-good">good</span>
+      </div>
+      <div class="items">
+        <div class="item good">
+          <div class="item-title">Reverse proxy & load balancing config</div>
+          <div class="item-sub">upstream block, proxy_pass, least_conn, ip_hash strategies</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">SSL termination with Certbot</div>
+          <div class="item-sub">Let's Encrypt, auto-renewal, HTTPS redirect, HSTS headers</div>
+        </div>
+        <div class="item plus">
+          <div class="item-title">Kafka internals in depth</div>
+          <div class="item-sub">Topics, partitions, consumer groups, offset management, at-least-once vs exactly-once delivery</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LLD -->
+  <div class="section" id="lld">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">SOLID principles</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Single Responsibility</div>
+          <div class="item-sub">Split UserService into AuthService + ProfileService + NotificationService — one reason to change</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Open/Closed</div>
+          <div class="item-sub">Add new payment method without touching existing PaymentService — extend, don't modify</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Liskov, Interface Segregation, DI</div>
+          <div class="item-sub">Program to abstractions — inject interfaces not implementations (NestJS DI makes this natural)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Creational patterns</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Singleton</div>
+          <div class="item-sub">DB connection pool, Redis client, config manager — implement with module-level caching</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Factory & Abstract Factory</div>
+          <div class="item-sub">NotificationFactory → EmailNotifier / SMSNotifier / PushNotifier based on type</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Builder</div>
+          <div class="item-sub">Complex query builder, email template builder — chained methods returning `this`</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Structural patterns</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Repository pattern</div>
+          <div class="item-sub">Abstract DB ops — UserRepository interface with PostgresUserRepository implementation</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Adapter</div>
+          <div class="item-sub">Wrap third-party SDK (Stripe, Twilio) behind your own interface — swap vendors without changing business logic</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Decorator & Proxy</div>
+          <div class="item-sub">Add logging/caching to a service without modifying it — NestJS interceptors are decorators in practice</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Behavioural patterns</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Observer / Event Emitter</div>
+          <div class="item-sub">Decouple event producers from consumers — NestJS EventEmitter2, Node.js EventEmitter</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Strategy</div>
+          <div class="item-sub">Swap algorithms at runtime — AuthStrategy (JWT/OAuth/API Key), SortStrategy, PaymentStrategy</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Chain of Responsibility</div>
+          <div class="item-sub">Middleware pipeline — request goes through auth → rate limit → validation → handler</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Command pattern</div>
+          <div class="item-sub">Encapsulate actions as objects — job queue commands, undo/redo, CQRS commands</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">LLD systems to design & code</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Parking Lot, Library Management, Hotel Booking</div>
+          <div class="item-sub">Class diagram + working TypeScript/JS code with all design patterns applied</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Elevator System, ATM, Vending Machine</div>
+          <div class="item-sub">State machine pattern — identify states, transitions, and guards</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Chess, Snake & Ladder, BookMyShow</div>
+          <div class="item-sub">Complex entity relationships, concurrency (seat locking), payment flow</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HLD -->
+  <div class="section" id="hld">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Fundamentals</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Capacity estimation</div>
+          <div class="item-sub">DAU → QPS → storage → bandwidth — practise back-of-envelope for every system</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">CAP theorem & BASE vs ACID</div>
+          <div class="item-sub">Consistency vs Availability trade-off — which to choose when, eventual consistency patterns</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Horizontal vs vertical scaling</div>
+          <div class="item-sub">Stateless services, session externalisation to Redis, shared-nothing architecture</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Load balancing strategies</div>
+          <div class="item-sub">Round-robin, least connections, consistent hashing — L4 vs L7 load balancers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Caching & CDN</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Where to cache — browser, CDN, API gateway, app, DB</div>
+          <div class="item-sub">Cache invalidation strategies — TTL, event-driven invalidation, write-through</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Cache stampede / thundering herd</div>
+          <div class="item-sub">Mutex lock, probabilistic early expiration, background refresh patterns</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Databases at scale</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Read replicas & CQRS</div>
+          <div class="item-sub">Separate read/write DB, replication lag handling, eventual consistency in reads</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Database sharding</div>
+          <div class="item-sub">Shard key selection, consistent hashing ring, hotspot problem, cross-shard queries</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">When to use NoSQL vs SQL</div>
+          <div class="item-sub">Schema flexibility, write throughput, geospatial, time-series — pick the right DB for the use case</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Messaging & async</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Message queue vs event streaming</div>
+          <div class="item-sub">RabbitMQ (task queue) vs Kafka (event log) — retention, replay, consumer groups</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Idempotency & at-least-once delivery</div>
+          <div class="item-sub">Idempotency keys, deduplication, outbox pattern for guaranteed delivery</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Saga pattern for distributed transactions</div>
+          <div class="item-sub">Choreography vs orchestration sagas — compensating transactions on failure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">HLD systems to design</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">URL Shortener, Rate Limiter, Notification System</div>
+          <div class="item-sub">These 3 cover caching, Redis patterns, async queues — most common in interviews</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Twitter Feed, WhatsApp, Uber</div>
+          <div class="item-sub">Fan-out on write vs read, WebSocket at scale, geospatial indexing</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">YouTube, Google Drive, Search Autocomplete</div>
+          <div class="item-sub">Object storage, CDN, chunked upload, inverted index, trie at scale</div>
+        </div>
+        <div class="item plus">
+          <div class="item-title">Payment system, Stock exchange, Ad click aggregation</div>
+          <div class="item-sub">Exactly-once semantics, ACID at scale, time-series aggregation, idempotency</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section" id="projects">
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Tier 1 — must build (on resume)</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">Real-Time Chat (WebSocket + Redis Pub/Sub)</div>
+          <div class="item-sub">Covers: WebSocket, horizontal scaling, presence tracking, message persistence, JWT auth</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">URL Shortener with Analytics</div>
+          <div class="item-sub">Covers: 3-layer caching, async analytics pipeline, load testing with k6, materialized views</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Multi-Tenant SaaS backend</div>
+          <div class="item-sub">Covers: schema isolation, Keycloak/OAuth, Kafka fan-out, dynamic tenant onboarding</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Tier 2 — differentiate yourself</div>
+        <span class="badge badge-good">good</span>
+      </div>
+      <div class="items">
+        <div class="item good">
+          <div class="item-title">API Gateway / Rate Limiter (from scratch)</div>
+          <div class="item-sub">Build your own — sliding window in Redis, token bucket, route proxying with Nginx</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Job Queue System (BullMQ-like, simpler)</div>
+          <div class="item-sub">Covers: Redis streams, worker concurrency, retry/DLQ, priority queues</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">E-commerce order service with Saga pattern</div>
+          <div class="item-sub">Covers: distributed transactions, compensating actions, Kafka choreography</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Tier 3 — stand out</div>
+        <span class="badge badge-plus">stand out</span>
+      </div>
+      <div class="items">
+        <div class="item plus">
+          <div class="item-title">Distributed tracing (OpenTelemetry)</div>
+          <div class="item-sub">Instrument NestJS services, visualise traces in Jaeger/Zipkin</div>
+        </div>
+        <div class="item plus">
+          <div class="item-title">Custom ORM / query builder in TypeScript</div>
+          <div class="item-sub">Shows deep DB understanding — build a simple type-safe query builder</div>
+        </div>
+        <div class="item plus">
+          <div class="item-title">Open source contribution to NestJS / BullMQ / Prisma</div>
+          <div class="item-sub">Even a bug fix or docs PR — verifiable, carries enormous credibility with interviewers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category fade-in">
+      <div class="cat-header">
+        <div class="cat-title">Every project must have</div>
+        <span class="badge badge-must">must</span>
+      </div>
+      <div class="items">
+        <div class="item must">
+          <div class="item-title">README with architecture diagram</div>
+          <div class="item-sub">Recruiters and engineers both check GitHub — a good README doubles perceived quality</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Docker Compose — one-command setup</div>
+          <div class="item-sub">docker-compose up should spin up app + DB + Redis + any queues automatically</div>
+        </div>
+        <div class="item must">
+          <div class="item-title">Swagger / OpenAPI docs</div>
+          <div class="item-sub">Every endpoint documented — NestJS @ApiProperty decorators make this fast</div>
+        </div>
+        <div class="item good">
+          <div class="item-title">Unit tests with >60% coverage</div>
+          <div class="item-sub">Shows production mindset — even a few well-written tests are better than none</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  Backend Engineer Roadmap &nbsp;·&nbsp; 1.5 YOE Target &nbsp;·&nbsp; Built for Ritesh Chauhan
+</footer>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const sections = document.querySelectorAll('.section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      // re-trigger fade-in for newly shown items
+      observeItems();
+    });
+  });
+
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress').style.width = progress + '%';
+  });
+
+  // Fade-in on scroll
+  function observeItems() {
+    const items = document.querySelectorAll('.section.active .fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    items.forEach(el => {
+      el.classList.remove('visible');
+      observer.observe(el);
+    });
+  }
+
+  // Init
+  observeItems();
+</script>
+</body>
+</html>
